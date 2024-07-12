@@ -1,0 +1,29 @@
+{
+  "name": "react-analytics-tracker-firebase",
+  "version": "1.0.0",
+  "description": "This is a firestore API project to store and retrieve data from \"react-analytics-tracker\" package",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indranil6/react-analytics-tracker-firebase.git"
+  },
+  "author": "Indranil Kundu <indranilkundu6@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/indranil6/react-analytics-tracker-firebase/issues"
+  },
+  "homepage": "https://github.com/indranil6/react-analytics-tracker-firebase#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
