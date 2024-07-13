@@ -1,4 +1,4 @@
-const { db, admin } = require("../config/firebase");
+const { firestore, firebase } = require("../config/firebase");
 const formatDate = require("../utils/formatDate");
 const {
   REACT_ANALYTICS_TRACKING_COLLECTION,
@@ -7,7 +7,7 @@ const {
 const addData = async (req, res) => {
   try {
     const data = req.body;
-    const docRef = await db
+    const docRef = await firestore
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .add(data);
     res.status(201).send({ id: docRef.id });
@@ -19,7 +19,7 @@ const addData = async (req, res) => {
 const getData = async (req, res) => {
   try {
     const { domain, value } = req.query;
-    const snapshot = await db
+    const snapshot = await firestore
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .where(domain, "==", value)
       .get();
@@ -42,7 +42,7 @@ const getData = async (req, res) => {
 
 const getPageViewsLineChart = async (req, res) => {
   try {
-    const snapshot = await db
+    const snapshot = await firestore
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .get();
     const data = {};
@@ -66,7 +66,7 @@ const getPageViewsLineChart = async (req, res) => {
 
 const getPageViewsBarChart = async (req, res) => {
   try {
-    const snapshot = await db
+    const snapshot = await firestore
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .get();
     const data = {};
@@ -90,7 +90,7 @@ const getPageViewsBarChart = async (req, res) => {
 
 const getPageViewsHeatmap = async (req, res) => {
   try {
-    const snapshot = await db
+    const snapshot = await firestore
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .get();
     const data = {};

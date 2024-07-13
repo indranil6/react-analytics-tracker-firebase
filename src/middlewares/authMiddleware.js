@@ -1,15 +1,32 @@
-const { admin } = require("../server");
+const { firebase, firestore } = require("../server");
 
 const authMiddleware = async (req, res, next) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
+  const { appName } = req.body;
 
   if (!idToken) {
     return res.status(401).send({ message: "Unauthorized" });
   }
 
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const decodedToken = await firebase.auth().verifyIdToken(idToken);
+    const userDoc = await firestore
+      .collection("users")
+      .doc(decodedToken.uid)
+      .get();
+
+    if (!userDoc.exists) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+
+    const userAppName = userDoc.data().appName;
+
+    if (userAppName !== appName) {
+      return res.status(403).send({ message: "Forbidden" });
+    }
+
     req.user = decodedToken;
+    req.appName = userAppName;
     next();
   } catch (error) {
     res.status(401).send({ message: "Unauthorized", error: error.message });

@@ -7,10 +7,12 @@ const {
   getPageViewsHeatmap,
 } = require("../controllers/analyticsController");
 
+const authMiddleware = require("../middlewares/authMiddleware");
+
 router.post("/data", addData);
-router.get("/data", getData);
-router.get("/api/page-views/line-chart", getPageViewsLineChart);
-router.get("/api/page-views/bar-chart", getPageViewsBarChart);
-router.get("/api/page-views/heatmap", getPageViewsHeatmap);
+router.get("/data", authMiddleware, getData);
+router.get("/api/page-views/line-chart", authMiddleware, getPageViewsLineChart);
+router.get("/api/page-views/bar-chart", authMiddleware, getPageViewsBarChart);
+router.get("/api/page-views/heatmap", authMiddleware, getPageViewsHeatmap);
 
 module.exports = router;
