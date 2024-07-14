@@ -132,3 +132,4 @@ dist
 #serviceAccountKey.json
 
 serviceAccountKey.json
+.vercel

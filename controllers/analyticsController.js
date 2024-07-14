@@ -47,16 +47,20 @@ const getPageViewsLineChart = async (req, res) => {
       .get();
     const data = {};
 
+    console.log("Fetching data from Firestore...");
+
     snapshot.forEach((doc) => {
       const payload = doc.data();
-      const date = formatDate(new Date(payload.timestamp));
-
+      const date = formatDate(new Date(payload.events[0].timestamp));
+      console.log("payload", payload);
+      console.log("date", date);
       if (!data[date]) {
         data[date] = 0;
       }
       data[date] += 1; // Increment the page view count for the date
     });
 
+    console.log("Fetching data successful. Sending response...");
     res.json(data);
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -97,8 +101,8 @@ const getPageViewsHeatmap = async (req, res) => {
 
     snapshot.forEach((doc) => {
       const payload = doc.data();
-      const date = formatDate(new Date(payload.timestamp));
-      const hour = new Date(payload.timestamp).getHours();
+      const date = formatDate(new Date(payload.events[0].timestamp));
+      const hour = new Date(payload.events[0].timestamp).getHours();
 
       if (!data[date]) {
         data[date] = Array(24).fill(0);

@@ -1,8 +1,8 @@
-const { firebase, firestore } = require("../server");
+const { firebase, firestore } = require("../config/firebase");
 
 const authMiddleware = async (req, res, next) => {
   const idToken = req.headers.authorization?.split("Bearer ")[1];
-  const { appName } = req.body;
+  const appName = req.headers.appname || req.query?.appname;
 
   if (!idToken) {
     return res.status(401).send({ message: "Unauthorized" });

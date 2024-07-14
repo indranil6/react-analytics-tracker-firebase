@@ -2,9 +2,9 @@
   "name": "react-analytics-tracker-firebase",
   "version": "1.0.0",
   "description": "This is a firestore API project to store and retrieve data from \"react-analytics-tracker\" package",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -9,6 +9,9 @@ const {
 
 const authMiddleware = require("../middlewares/authMiddleware");
 
+router.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 router.post("/data", addData);
 router.get("/data", authMiddleware, getData);
 router.get("/api/page-views/line-chart", authMiddleware, getPageViewsLineChart);
