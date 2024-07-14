@@ -7,11 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: "https://analytics-tracker-firebase.web.app/",
-  })
-); // Enable CORS
+app.use(cors()); // Enable CORS
 
 app.use(analyticsRoutes);
 app.use(authRoutes);
