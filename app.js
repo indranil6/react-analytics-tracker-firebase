@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://localhost:3000",
+    origin: "https://analytics-tracker-firebase.web.app/",
   })
 ); // Enable CORS
 
