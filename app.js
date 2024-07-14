@@ -7,7 +7,11 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors()); // Enable CORS
+app.use(
+  cors({
+    origin: "https://localhost:3000",
+  })
+); // Enable CORS
 
 app.use(analyticsRoutes);
 app.use(authRoutes);
