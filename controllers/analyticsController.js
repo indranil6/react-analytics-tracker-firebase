@@ -47,6 +47,11 @@ const getPageViewsLineChart = async (req, res) => {
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .where("appName", "==", appName)
       .get();
+    if (snapshot.empty) {
+      res.status(404).send({ message: "No matching documents found" });
+      return;
+    }
+
     const data = {};
 
     console.log("Fetching data from Firestore...");
@@ -76,6 +81,11 @@ const getPageViewsBarChart = async (req, res) => {
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .where("appName", "==", appName)
       .get();
+    if (snapshot.empty) {
+      res.status(404).send({ message: "No matching documents found" });
+      return;
+    }
+
     const data = {};
 
     snapshot.forEach((doc) => {
@@ -102,6 +112,12 @@ const getPageViewsHeatmap = async (req, res) => {
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .where("appName", "==", appName)
       .get();
+
+    if (snapshot.empty) {
+      res.status(404).send({ message: "No matching documents found" });
+      return;
+    }
+
     const data = {};
 
     snapshot.forEach((doc) => {
@@ -128,6 +144,11 @@ const getTotalRecords = async (req, res) => {
       .collection(REACT_ANALYTICS_TRACKING_COLLECTION)
       .where("appName", "==", appName)
       .get();
+    if (snapshot.empty) {
+      res.status(404).send({ message: "No matching documents found" });
+      return;
+    }
+
     let totalRecords = snapshot.size;
     let totalUniqueSessions = new Set();
 
